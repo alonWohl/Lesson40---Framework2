@@ -1,4 +1,5 @@
 import { bookSevice } from '../services/book.service.js'
+import { AppLoader } from './AppLoader.jsx'
 
 const { useState, useEffect } = React
 
@@ -8,7 +9,7 @@ export function BookDetails({ bookId, onSelectBookId }) {
     bookSevice.get(bookId).then((book) => setBook(book))
   }, [])
 
-  if (!book) return <div>loading...</div>
+  if (!book) return <AppLoader />
   return (
     <section className='book-details'>
       <img src={book.thumbnail} alt='book-image' />

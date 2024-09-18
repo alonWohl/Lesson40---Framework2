@@ -2,6 +2,7 @@ import { bookSevice } from '../services/book.service.js'
 import { BookList } from '../cmps/BookList.jsx'
 import { BookDetails } from '../cmps/BookDetails.jsx'
 import { BookFilter } from '../cmps/BookFilter.jsx'
+import { AppLoader } from '../cmps/AppLoader.jsx'
 
 const { useState, useEffect } = React
 
@@ -36,7 +37,7 @@ export function BookIndex() {
     setFilterBy(filterBy)
   }
 
-  if (!books) return <div className='loading'>loading...</div>
+  if (!books) return <AppLoader />
 
   return (
     <section className='book-index'>
