@@ -1,7 +1,7 @@
 export function AppHeader({ onSetPage }) {
   return (
     <header className='app-header'>
-      <h1>My App</h1>
+      <h1>Miss Book</h1>
       <nav className='main-nav'>
         <a onClick={() => onSetPage('home')} href='#'>
           Home
