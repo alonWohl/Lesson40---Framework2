@@ -1,6 +1,6 @@
 import { BookPreview } from './BookPreview.jsx'
 
-export function BookList({ books }) {
+export function BookList({ books, onRemoveBook, onSelectBookId }) {
   return (
     <ul className='book-list'>
       {books.map((book) => (
@@ -8,8 +8,8 @@ export function BookList({ books }) {
           <BookPreview book={book} />
 
           <section>
-            <button>X</button>
-            <button>Details</button>
+            <button onClick={() => onRemoveBook(book.id)}>X</button>
+            <button onClick={() => onSelectBookId(book.id)}>Details</button>
           </section>
         </li>
       ))}

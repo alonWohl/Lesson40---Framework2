@@ -1,5 +1,3 @@
-import { BookPreview } from './BookPreview.jsx'
-
 export function Home() {
   return (
     <section>

@@ -37,6 +37,11 @@ object {
   max-width: 100%;
 }
 
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
 /* Simple and useful CSS Debugging Technique */
 .debug * {
   outline: 1px solid gold;
