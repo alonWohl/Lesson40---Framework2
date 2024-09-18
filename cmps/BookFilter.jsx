@@ -32,9 +32,9 @@ export function BookFilter({ filterBy, onSetFilterBy }) {
   const { txt, minPrice } = filterByToEdit
 
   return (
-    <fieldset>
+    <fieldset className='book-filter'>
       <legend>Fltering</legend>
-      <form className='book-filter' onSubmit={onSubmit}>
+      <form className='form-filter' onSubmit={onSubmit}>
         <label htmlFor='txt'>Book Name: </label>
         <input value={txt} onChange={handleChange} type='text' id='txt' name='txt' />
         <label htmlFor='minPrice'>Price : </label>

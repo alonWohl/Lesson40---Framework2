@@ -6,13 +6,6 @@
   gap: 1em;
 }
 
-.book-filter {
-  display: flex;
-  align-items: center;
-
-  gap: 1em;
-}
-
 .book-list {
   display: flex;
   align-items: center;
@@ -20,4 +13,36 @@
   flex-wrap: wrap;
 
   gap: 1em;
+}
+
+.book-list .remove-btn {
+  font-size: 1.1em;
+  border-radius: 50%;
+  background-color: inherit;
+}
+
+.book-list .remove-btn:hover {
+  background-color: rgb(240, 65, 65);
+}
+
+.book-filter {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+  max-width: min-content;
+  gap: 0.5em;
+}
+
+.form-filter {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: flex-start;
+
+  gap: 0.5em;
+}
+
+.book-filter button {
+  align-self: flex-end;
 }
