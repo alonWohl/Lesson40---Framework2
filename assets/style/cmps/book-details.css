@@ -9,3 +9,14 @@
 .book-details img {
   max-width: 300px;
 }
+
+.book-details span {
+  font-size: 1.1em;
+  font-weight: bold;
+
+  color: var(--clr1);
+}
+
+.book-details button {
+  align-self: flex-end;
+}

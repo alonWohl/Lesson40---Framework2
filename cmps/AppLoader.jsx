@@ -1,7 +1,3 @@
 export function AppLoader() {
-  return (
-    <div className='app-loader'>
-      <img src='../assets/img/loader.svg' alt='loader' />
-    </div>
-  )
+  return <img className='app-loader' src='../assets/img/loader.svg' alt='loader' />
 }
