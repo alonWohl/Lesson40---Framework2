@@ -38,7 +38,7 @@ export function BookFilter({ filterBy, onSetFilterBy }) {
         <label htmlFor='txt'>Book Name: </label>
         <input value={txt} onChange={handleChange} type='text' id='txt' name='txt' />
         <label htmlFor='minPrice'>Price : </label>
-        <input value={minPrice || ''} onChange={handleChange} type='number' id='minPrice' name='minPrice' />
+        <input min='0' value={minPrice || ''} onChange={handleChange} type='number' id='minPrice' name='minPrice' />
         <button>Submit</button>
       </form>
     </fieldset>
