@@ -1,6 +1,7 @@
 import { bookSevice } from '../services/book.service.js'
 import { getCurrencySymbol } from '../services/util.service.js'
 import { AppLoader } from './AppLoader.jsx'
+import { LongTxt } from './LongTxt.jsx'
 
 const { useState, useEffect } = React
 
@@ -22,57 +23,60 @@ export function BookDetails({ bookId, onSelectBookId }) {
       })
   }
 
-  function pageCountText(count) {
+  function getPageCountText(count) {
     if (count >= 500) return '- Serious Reading'
     if (count >= 200) return '- Descent Reading'
     if (count <= 100) return '- Light Reading'
   }
 
-  function isNew(year) {
+  function getBookAgeLabel(year) {
     const currYear = new Date().getFullYear()
 
     if (currYear - year >= 10) return ' Vintage'
     return ' New'
   }
 
-  function priceClassName(price) {
+  function getPriceClassName(price) {
     if (price > 150) return 'red'
     if (price < 20) return 'green'
   }
 
   if (!book) return <AppLoader />
-
   return (
     <section className='book-details'>
-      <img src={book.thumbnail} alt='book-image' />
+      <img src={book.thumbnail} alt='Book Thumbnail' />
+
       <h2>
-        <span>Tilte:</span> {book.title}
+        <span>Title: </span> {book.title}
       </h2>
+
       <h3>
-        <span>Subtitle :</span>
-        {book.subtitle}
+        <span>Subtitle: </span> {book.subtitle}
       </h3>
+
       <p>
-        <span>Pages: </span>
-        {book.pageCount} {pageCountText(book.pageCount)}
+        <span>Pages: </span> {book.pageCount} {getPageCountText(book.pageCount)}
       </p>
-      <p className={priceClassName(book.listPrice.amount)}>
+
+      <p className={getPriceClassName(book.listPrice.amount)}>
         <span>Price: </span>
-        {book.listPrice.amount}
-        {getCurrencySymbol(book.listPrice.currencyCode)}
-        {book.listPrice.isOnSale && <span className='sale'> SALE !</span>}
+        {book.listPrice.amount} {getCurrencySymbol(book.listPrice.currencyCode)}
+        {book.listPrice.isOnSale && <span className='sale'> SALE!</span>}
       </p>
+
       <p>
-        <span>By: </span> {book.authors}
+        <span>By: </span> {book.authors.join(', ')}
       </p>
+
       <p>
-        <span>Published at: </span>
-        {book.publishedDate} {isNew(book.publishedDate)}
+        <span>Published: </span> {book.publishedDate} ({getBookAgeLabel(book.publishedDate)})
       </p>
+
       <p>
-        <span>Desc: </span>
-        {book.description}
+        <span>Description: </span>
+        <LongTxt text={book.description} />
       </p>
+
       <button onClick={() => onSelectBookId(null)}>Back</button>
     </section>
   )
