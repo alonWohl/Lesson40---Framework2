@@ -1,7 +1,7 @@
 import { bookSevice } from '../services/book.service.js'
 import { getCurrencySymbol } from '../services/util.service.js'
-import { AppLoader } from './AppLoader.jsx'
-import { LongTxt } from './LongTxt.jsx'
+import { AppLoader } from '../cmps/AppLoader.jsx'
+import { LongTxt } from '../cmps/LongTxt.jsx'
 
 const { useState, useEffect } = React
 
