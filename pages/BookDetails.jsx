@@ -23,14 +23,15 @@ export function BookDetails() {
         setBook(book)
       })
       .catch((err) => {
+        showErr
         console.error('Had issues loading book details', err)
       })
   }
 
   function getPageCountText(count) {
-    if (count >= 500) return '- Serious Reading'
-    if (count >= 200) return '- Descent Reading'
-    if (count <= 100) return '- Light Reading'
+    if (count >= 500) return ' - Serious Reading'
+    if (count >= 200) return ' - Descent Reading'
+    if (count <= 100) return ' - Light Reading'
   }
 
   function getBookAgeLabel(year) {

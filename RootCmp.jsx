@@ -6,6 +6,7 @@ import { AppHeader } from './cmps/AppHeader.jsx'
 import { BookIndex } from './pages/BookIndex.jsx'
 import { Home } from './pages/Home.jsx'
 import { BookDetails } from './pages/BookDetails.jsx'
+import { UserMsg } from './cmps/UserMsg.jsx'
 
 export function App() {
   return (
@@ -20,6 +21,7 @@ export function App() {
             <Route path='/book/:bookId' element={<BookDetails />} />
           </Routes>
         </main>
+        <UserMsg />
       </section>
     </Router>
   )

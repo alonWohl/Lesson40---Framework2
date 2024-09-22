@@ -3,6 +3,7 @@ import { BookList } from '../cmps/BookList.jsx'
 import { BookDetails } from '../pages/BookDetails.jsx'
 import { BookFilter } from '../cmps/BookFilter.jsx'
 import { AppLoader } from '../cmps/AppLoader.jsx'
+import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service.js'
 
 const { useState, useEffect } = React
 
@@ -19,12 +20,14 @@ export function BookIndex() {
       .query(filterBy)
       .then(setBooks)
       .catch((err) => {
+        showErrorMsg(`Loading Book Has failed`)
         console.log('err:', err)
       })
   }
 
   function onRemoveBook(bookId) {
     bookSevice.remove(bookId).then(() => {
+      showSuccessMsg('Book Has Removed')
       setBooks(books.filter((book) => book.id !== bookId))
     })
   }
