@@ -5,6 +5,7 @@ import { AboutUs } from './pages/AboutUs.jsx'
 import { AppHeader } from './cmps/AppHeader.jsx'
 import { BookIndex } from './pages/BookIndex.jsx'
 import { Home } from './pages/Home.jsx'
+import { BookDetails } from './pages/BookDetails.jsx'
 
 export function App() {
   return (
@@ -16,7 +17,7 @@ export function App() {
             <Route path='/' element={<Home />} />
             <Route path='/about' element={<AboutUs />} />
             <Route path='/book' element={<BookIndex />} />
-            {/* <Route path='/' element={<Home />} /> */}
+            <Route path='/book/:bookId' element={<BookDetails />} />
           </Routes>
         </main>
       </section>

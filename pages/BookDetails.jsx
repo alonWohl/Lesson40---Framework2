@@ -1,20 +1,24 @@
+const { useState, useEffect } = React
+const { useParams, useNavigate, Link } = ReactRouterDOM
+
 import { bookSevice } from '../services/book.service.js'
 import { getCurrencySymbol } from '../services/util.service.js'
 import { AppLoader } from '../cmps/AppLoader.jsx'
 import { LongTxt } from '../cmps/LongTxt.jsx'
 
-const { useState, useEffect } = React
-
-export function BookDetails({ bookId, onSelectBookId }) {
+export function BookDetails() {
   const [book, setBook] = useState(null)
+  const params = useParams()
+  const navigate = useNavigate()
 
   useEffect(() => {
     loadBook()
-  }, [])
+    console.log(params)
+  }, [params.bookId])
 
   function loadBook() {
     bookSevice
-      .get(bookId)
+      .get(params.bookId)
       .then((book) => {
         setBook(book)
       })
@@ -41,43 +45,56 @@ export function BookDetails({ bookId, onSelectBookId }) {
     if (price < 20) return 'green'
   }
 
+  function onBack() {
+    navigate('/book')
+  }
+
   if (!book) return <AppLoader />
+
+  const { thumbnail, title, subtitle, pageCount, listPrice, authors, publishedDate, description } = book
   return (
     <section className='book-details'>
-      <img src={book.thumbnail} alt='Book Thumbnail' />
+      <img src={thumbnail} alt='Book Thumbnail' />
+      <div className='details-title'>
+        <h2>
+          <span>Title: </span>
+          {title}
+        </h2>
 
-      <h2>
-        <span>Title: </span> {book.title}
-      </h2>
+        <h3>
+          <span>Subtitle: </span>
+          {subtitle}
+        </h3>
+      </div>
 
-      <h3>
-        <span>Subtitle: </span> {book.subtitle}
-      </h3>
+      <section className='details-info'>
+        <div>
+          <span>Pages: </span>
+          {pageCount} {getPageCountText(book.pageCount)}
+        </div>
 
-      <p>
-        <span>Pages: </span> {book.pageCount} {getPageCountText(book.pageCount)}
-      </p>
+        <div className={getPriceClassName(book.listPrice.amount)}>
+          <span>Price: </span>
+          {listPrice.amount} {getCurrencySymbol(book.listPrice.currencyCode)}
+          {listPrice.isOnSale && <span className='sale'> SALE!</span>}
+        </div>
 
-      <p className={getPriceClassName(book.listPrice.amount)}>
-        <span>Price: </span>
-        {book.listPrice.amount} {getCurrencySymbol(book.listPrice.currencyCode)}
-        {book.listPrice.isOnSale && <span className='sale'> SALE!</span>}
-      </p>
+        <div>
+          <span>By: </span>
+          {authors.join(', ')}
+        </div>
 
-      <p>
-        <span>By: </span> {book.authors.join(', ')}
-      </p>
+        <div>
+          <span>Published: </span> {publishedDate} ({getBookAgeLabel(publishedDate)})
+        </div>
 
-      <p>
-        <span>Published: </span> {book.publishedDate} ({getBookAgeLabel(book.publishedDate)})
-      </p>
+        <div>
+          <span>Description: </span>
+          <LongTxt text={description} />
+        </div>
+      </section>
 
-      <p>
-        <span>Description: </span>
-        <LongTxt text={book.description} />
-      </p>
-
-      <button onClick={() => onSelectBookId(null)}>Back</button>
+      <button onClick={onBack}>Back</button>
     </section>
   )
 }
