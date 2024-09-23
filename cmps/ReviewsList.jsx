@@ -1,5 +1,5 @@
 export function ReviewsList({ reviews, onRemoveReview }) {
-  if (!reviews && reviews.length) return <p>No reviews yet.</p>
+  if (!reviews || reviews.length) return <p>No reviews yet.</p>
   return (
     <ul className='reviews-list'>
       {reviews.map((review, idx) => (
