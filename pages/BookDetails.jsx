@@ -60,7 +60,7 @@ export function BookDetails() {
       .then(() => {
         setBook((prevBook) => ({
           ...prevBook,
-          reviews: [...prevBook.reviews, newReview]
+          reviews: prevBook.reviews ? [...prevBook.reviews, newReview] : [newReview]
         }))
         showSuccessMsg('Review added successfully!')
       })
@@ -128,6 +128,8 @@ export function BookDetails() {
         <LongTxt text={description} />
       </div>
 
+      <button onClick={onBack}>Back</button>
+
       <section className='reviews-container'>
         <span>Add Review: </span>
         <AddReview onSubmitReview={onSubmitReview} />
@@ -135,7 +137,14 @@ export function BookDetails() {
         <ReviewsList reviews={reviews} onRemoveReview={onRemoveReview} />
       </section>
 
-      <button onClick={onBack}>Back</button>
+      <section className='flex justify-between'>
+        <button>
+          <Link to={`/book/${book.prevbookId}`}>Prev book</Link>
+        </button>
+        <button>
+          <Link to={`/book/${book.nextbookId}`}>Next book</Link>
+        </button>
+      </section>
     </section>
   )
 }

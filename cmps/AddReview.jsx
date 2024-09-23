@@ -8,8 +8,20 @@ export function AddReview({ onSubmitReview }) {
   })
 
   function handleChange({ target }) {
-    const { name, value } = target
-    setReview((prevReview) => ({ ...prevReview, [name]: value }))
+    const field = target.name
+    let value = target.value
+
+    switch (target.type) {
+      case 'number':
+      case 'range':
+        value = +value
+        break
+
+      case 'checkbox':
+        value = target.checked
+        break
+    }
+    setReview((prevReview) => ({ ...prevReview, [field]: value }))
   }
 
   function onSubmit(ev) {

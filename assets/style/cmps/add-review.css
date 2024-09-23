@@ -1,6 +1,10 @@
 .reviews-container {
   display: flex;
   flex-direction: column;
+
+  padding: 1em;
+  border: 1px solid #ccc;
+  border-radius: 1em;
 }
 
 .reviews-container > * {
@@ -10,7 +14,7 @@
 .add-review {
   display: flex;
   flex-direction: column;
-  max-width: max-content;
+  max-width: 500px;
 
   padding: 1em;
   border: 1px solid #ccc;
