@@ -1,0 +1,35 @@
+.reviews-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.reviews-container > * {
+  margin-block-end: 0.5em;
+}
+
+.add-review {
+  display: flex;
+  flex-direction: column;
+  max-width: max-content;
+
+  padding: 1em;
+  border: 1px solid #ccc;
+  border-radius: 1em;
+}
+
+.reviews-list {
+  display: flex;
+  gap: 1em;
+}
+
+.review-item {
+  display: flex;
+  flex-direction: column;
+
+  padding: 10px;
+  box-shadow: 0px 0px 10px rgb(71, 64, 64);
+  border-radius: 1em;
+
+  max-width: max-content;
+  text-transform: capitalize;
+}

@@ -61,7 +61,7 @@ function makeLorem(size = 100) {
   return txt
 }
 
-function getRandomIntInclusive(min, max) {
+export function getRandomIntInclusive(min, max) {
   min = Math.ceil(min)
   max = Math.floor(max)
   return Math.floor(Math.random() * (max - min + 1)) + min
@@ -86,20 +86,7 @@ function getDayName(date, locale) {
 }
 
 function getMonthName(date) {
-  const monthNames = [
-    'January',
-    'February',
-    'March',
-    'April',
-    'May',
-    'June',
-    'July',
-    'August',
-    'September',
-    'October',
-    'November',
-    'December'
-  ]
+  const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
   return monthNames[date.getMonth()]
 }
 

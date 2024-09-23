@@ -16,3 +16,10 @@ input:focus {
   background-color: var(--clr1bg);
   transition: background-color 1s;
 }
+
+button.remove-btn {
+  border-radius: 50%;
+}
+button.remove-btn:hover {
+  background-color: rgb(240, 65, 65);
+}

@@ -15,16 +15,6 @@
   gap: 1em;
 }
 
-.book-list .remove-btn {
-  font-size: 1.1em;
-  border-radius: 50%;
-  background-color: inherit;
-}
-
-.book-list .remove-btn:hover {
-  background-color: rgb(240, 65, 65);
-}
-
 .book-filter {
   display: flex;
   flex-direction: column;

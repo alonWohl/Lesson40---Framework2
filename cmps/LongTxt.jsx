@@ -11,7 +11,7 @@ export function LongTxt({ text, limit = 100 }) {
   const isTruncated = text.length > limit
 
   return (
-    <p className='inline'>
+    <p className='long-text'>
       {displayText}
       {!isExpanded && isTruncated && '...'}
       {isTruncated && <button onClick={onToggleExpansion}>{isExpanded ? 'Less' : 'More'}</button>}

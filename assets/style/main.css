@@ -13,6 +13,7 @@
 @import 'cmps/user-msg.css';
 @import 'cmps/app-loader.css';
 @import 'cmps/book-preview.css';
+@import 'cmps/add-review.css';
 
 @import 'pages/book-index.css';
 @import 'pages/book-details.css';
