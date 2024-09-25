@@ -5,6 +5,7 @@ import { AppLoader } from '../cmps/AppLoader.jsx'
 import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service.js'
 
 const { useState, useEffect } = React
+const { Link } = ReactRouterDOM
 
 export function BookIndex() {
   const [books, setBooks] = useState(null)
@@ -41,6 +42,9 @@ export function BookIndex() {
     <section className='book-index'>
       <React.Fragment>
         <BookFilter filterBy={filterBy} onSetFilterBy={onSetFilterBy} />
+        <button className='add-book-btn'>
+          <Link to='/book/edit'>Add Book</Link>
+        </button>
         <BookList books={books} onRemoveBook={onRemoveBook} />
       </React.Fragment>
     </section>

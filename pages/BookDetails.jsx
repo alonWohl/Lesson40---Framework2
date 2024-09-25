@@ -116,7 +116,7 @@ export function BookDetails() {
 
       <div className='authors'>
         <span>By: </span>
-        {authors.join(', ')}
+        {authors}
       </div>
 
       <div className='publish'>

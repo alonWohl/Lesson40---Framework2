@@ -43,9 +43,19 @@ function save(book) {
     return storageService.post(BOOK_KEY, book)
   }
 }
-
-function getEmptyBook(name = '', price = '') {
-  return { name, price }
+function getEmptyBook(
+  title = '',
+  subtitle = '',
+  authors = '',
+  publishedDate = '',
+  description = '',
+  pageCount = '',
+  categories = '',
+  language = '',
+  thumbnail = 'https://via.placeholder.com/300x400',
+  listPrice = { amount: '', currencyCode: 'EUR', isOnSale: Math.random() > 0.7 }
+) {
+  return { title, subtitle, authors, publishedDate, description, pageCount, categories, language, listPrice, thumbnail }
 }
 
 function getDefaultFilter() {
@@ -73,7 +83,8 @@ function _createBooks() {
           amount: utilService.getRandomIntInclusive(80, 500),
           currencyCode: 'EUR',
           isOnSale: Math.random() > 0.7
-        }
+        },
+        reviews: []
       }
       books.push(book)
     }
@@ -85,9 +96,6 @@ function addReview(bookId, review) {
   review.id = utilService.makeId()
   return get(bookId)
     .then((book) => {
-      if (!book.reviews) {
-        book.reviews = []
-      }
       book.reviews.push(review)
       return save(book)
     })
@@ -100,11 +108,9 @@ function removeReview(bookId, reviewId) {
   return get(bookId)
     .then((book) => {
       const reviewIdx = book.reviews.findIndex((review) => review.id === reviewId)
-      if (reviewIdx !== -1) {
-        book.reviews.splice(reviewIdx, 1)
-        save(book)
-        return book
-      }
+      book.reviews.splice(reviewIdx, 1)
+      save(book)
+      return book
     })
     .catch((err) => {
       console.error('Cannot remove review from book', err)

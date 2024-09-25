@@ -24,6 +24,10 @@
   gap: 0.5em;
 }
 
+.add-book-btn {
+  align-self: center;
+}
+
 .form-filter {
   display: flex;
   flex-direction: column;

@@ -9,11 +9,17 @@
 }
 
 .book-preview .btn-group {
+  position: relative;
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  gap: 0.1em;
 
   margin: 1.5em 0 0 0;
+}
+
+.book-preview .btn-group .remove-btn {
+  position: absolute;
+  right: 0;
 }
 
 .book-preview img {
