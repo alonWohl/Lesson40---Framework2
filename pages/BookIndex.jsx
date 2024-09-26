@@ -3,6 +3,7 @@ import { BookList } from '../cmps/BookList.jsx'
 import { BookFilter } from '../cmps/BookFilter.jsx'
 import { AppLoader } from '../cmps/AppLoader.jsx'
 import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service.js'
+import { BookAdd } from '../cmps/BookAdd.jsx'
 
 const { useState, useEffect } = React
 const { Link } = ReactRouterDOM

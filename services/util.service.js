@@ -6,7 +6,8 @@ export const utilService = {
   saveToStorage,
   padNum,
   getDayName,
-  getMonthName
+  getMonthName,
+  debounce
 }
 
 function makeId(length = 6) {
@@ -109,4 +110,14 @@ export function getCurrencySymbol(currencyCode) {
   }
 
   return currencySymbols[currencyCode] || 'Unknown Currency Code'
+}
+
+function debounce(callback, wait) {
+  let timeoutId = null
+  return (...args) => {
+    window.clearTimeout(timeoutId)
+    timeoutId = window.setTimeout(() => {
+      callback(...args)
+    }, wait)
+  }
 }

@@ -12,7 +12,9 @@ export const bookSevice = {
   getDefaultFilter,
   getEmptyBook,
   addReview,
-  removeReview
+  removeReview,
+  getGoogleBooks,
+  addGoogleBook
 }
 
 function query(filterBy = {}) {
@@ -126,4 +128,54 @@ function _setNextPrevbookId(book) {
     book.prevbookId = prevbook.id
     return book
   })
+}
+
+function getGoogleBooks(bookName, maxResults = 5) {
+  const url = `https://www.googleapis.com/books/v1/volumes?printType=books&q=${encodeURIComponent(bookName)}&maxResults=${maxResults}`
+
+  return axios
+    .get(url)
+    .then((res) => {
+      const data = res.data.items
+      const books = _formatGoogleBooks(data)
+
+      return books
+    })
+    .catch((error) => {
+      console.error('Error fetching books:', error)
+    })
+}
+
+function _formatGoogleBooks(books) {
+  return books.map((book) => {
+    const volumeInfo = book.volumeInfo || {}
+    const formattedBook = {
+      id: utilService.makeId(),
+      title: volumeInfo.title || 'Untitled',
+      subtitle: volumeInfo.subtitle || '',
+      authors: volumeInfo.authors && volumeInfo.authors.length > 0 ? volumeInfo.authors[0] : 'Unknown Author',
+      publishedDate: volumeInfo.publishedDate || 'Unknown Date',
+      description: volumeInfo.description || 'No description available',
+      pageCount: volumeInfo.pageCount || 0,
+      categories: volumeInfo.categories && volumeInfo.categories.length > 0 ? volumeInfo.categories[0] : 'Uncategorized',
+      thumbnail: 'https://via.placeholder.com/300x400',
+      language: volumeInfo.language || 'en',
+      listPrice: {
+        amount: utilService.getRandomIntInclusive(80, 500),
+        currencyCode: 'EUR',
+        isOnSale: Math.random() > 0.7
+      },
+      reviews: []
+    }
+
+    if (volumeInfo.imageLinks && volumeInfo.imageLinks.thumbnail) {
+      formattedBook.thumbnail = volumeInfo.imageLinks.thumbnail
+    }
+
+    return formattedBook
+  })
+}
+
+function addGoogleBook(book) {
+  return storageService.post(BOOK_KEY, book)
 }
