@@ -15,7 +15,8 @@ export const bookSevice = {
   removeReview,
   getGoogleBooks,
   addGoogleBook,
-  getFilterFromSearchParams
+  getFilterFromSearchParams,
+  getCategoriesStats
 }
 
 function query(filterBy = {}) {
@@ -54,7 +55,7 @@ function getEmptyBook(
   description = '',
   pageCount = '',
   categories = '',
-  language = '',
+  language = 'en',
   thumbnail = 'https://via.placeholder.com/300x400',
   listPrice = { amount: '', currencyCode: 'EUR', isOnSale: Math.random() > 0.7 }
 ) {
@@ -158,7 +159,7 @@ function _formatGoogleBooks(books) {
       publishedDate: volumeInfo.publishedDate || 'Unknown Date',
       description: volumeInfo.description || 'No description available',
       pageCount: volumeInfo.pageCount || 0,
-      categories: volumeInfo.categories && volumeInfo.categories.length > 0 ? volumeInfo.categories[0] : 'Uncategorized',
+      categories: volumeInfo.categories && volumeInfo.categories.length > 0 ? volumeInfo.categories : 'Uncategorized',
       thumbnail: 'https://via.placeholder.com/300x400',
       language: volumeInfo.language || 'en',
       listPrice: {
@@ -188,4 +189,26 @@ function getFilterFromSearchParams(searchParams) {
     txt,
     minPrice
   }
+}
+
+function getCategoriesStats() {
+  return storageService.query(BOOK_KEY).then((books) => {
+    const bookCountByCategoryMap = _getBookCountByCategoryMap(books)
+    const data = Object.keys(bookCountByCategoryMap).map((category) => ({
+      title: category,
+      value: Math.round((bookCountByCategoryMap[category] / books.length) * 100)
+    }))
+    return data
+  })
+}
+
+function _getBookCountByCategoryMap(books) {
+  const bookCountByCategoryMap = books.reduce((map, book) => {
+    book.categories.forEach((category) => {
+      if (!map[category]) map[category] = 0
+      map[category]++
+    })
+    return map
+  }, {})
+  return bookCountByCategoryMap
 }
