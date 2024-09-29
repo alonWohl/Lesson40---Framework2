@@ -14,7 +14,8 @@ export const bookSevice = {
   addReview,
   removeReview,
   getGoogleBooks,
-  addGoogleBook
+  addGoogleBook,
+  getFilterFromSearchParams
 }
 
 function query(filterBy = {}) {
@@ -178,4 +179,13 @@ function _formatGoogleBooks(books) {
 
 function addGoogleBook(book) {
   return storageService.post(BOOK_KEY, book)
+}
+
+function getFilterFromSearchParams(searchParams) {
+  const txt = searchParams.get('txt') || ''
+  const minPrice = searchParams.get('minPrice') || ''
+  return {
+    txt,
+    minPrice
+  }
 }

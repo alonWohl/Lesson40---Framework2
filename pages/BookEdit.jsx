@@ -7,8 +7,7 @@ const { useState, useEffect } = React
 
 export function BookEdit() {
   const [bookToEdit, setBookToEdit] = useState(bookSevice.getEmptyBook())
-  const [addManually, setAddManually] = useState(false)
-
+  const [isFormVisible, setIsFormVisible] = useState(true)
   const { bookId } = useParams()
   const navigate = useNavigate()
 
@@ -77,19 +76,19 @@ export function BookEdit() {
     setBookToEdit((prevBook) => ({ ...prevBook, listPrice: { ...prevBook.listPrice, [field]: value } }))
   }
 
+  function toggleView() {
+    setIsFormVisible((prevIsFormVisible) => !prevIsFormVisible)
+  }
+
   const { title, subtitle, authors, publishedDate, description, pageCount, listPrice } = bookToEdit
   const formHeader = bookToEdit.id ? 'Edit' : 'Add'
 
   return (
     <section className='book-edit'>
       <h2>{formHeader} Book</h2>
-      {!bookToEdit.id && (
-        <div>
-          {!addManually && <BookAdd />}
-          <button onClick={() => setAddManually(!addManually)}>{addManually ? 'Add By Google' : 'Add Manually'}</button>
-        </div>
-      )}
-      {(bookToEdit.id || addManually) && (
+
+      {!bookToEdit.id && <button onClick={toggleView}> {isFormVisible ? 'Search in Google Books' : 'Add Manually'}</button>}
+      {isFormVisible || bookToEdit.id ? (
         <form className='book-edit-form' onSubmit={onSaveBook}>
           <label htmlFor='title'>title: </label>
           <input onChange={handleChange} type='text' name='title' id='title' value={title} />
@@ -107,21 +106,15 @@ export function BookEdit() {
           <input onChange={handleChange} type='text' name='authors' id='authors' value={authors} />
 
           <label htmlFor='publishedDate'>published at: </label>
-          <input
-            onChange={handleChange}
-            type='date'
-            id='publishedDate'
-            min='1900-01-01'
-            max='2099-12-31'
-            name='publishedDate'
-            value={publishedDate}
-          />
+          <input type='number' onChange={handleChange} value={publishedDate} />
 
           <label htmlFor='description'>description: </label>
           <textarea onChange={handleChange} type='text' name='description' id='description' value={description} />
 
           <button>save</button>
         </form>
+      ) : (
+        <BookAdd />
       )}
     </section>
   )
