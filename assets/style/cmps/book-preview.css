@@ -1,6 +1,7 @@
 .book-preview {
   display: flex;
   flex-direction: column;
+  position: relative;
 
   padding: 0.5em;
   border-radius: 10px;
@@ -9,17 +10,16 @@
 }
 
 .book-preview .btn-group {
-  position: relative;
   display: flex;
   align-items: center;
-  gap: 0.1em;
-
-  margin: 1.5em 0 0 0;
+  justify-content: space-between;
 }
 
-.book-preview .btn-group .remove-btn {
+.book-preview .edit-btn {
   position: absolute;
-  right: 0;
+  padding: 1em;
+  top: -8px;
+  right: -8px;
 }
 
 .book-preview img {

@@ -99,14 +99,14 @@ export function BookEdit() {
           <label htmlFor='pageCount'>pages: </label>
           <input onChange={handleChange} type='number' name='pageCount' id='pageCount' value={pageCount} />
 
-          <label htmlFor='amount'>price: </label>
-          <input onChange={handleChangeListPrice} type='number' name='listPrice.amount' id='amount' value={listPrice.amount} />
+          <label htmlFor='price'>price: </label>
+          <input onChange={handleChangeListPrice} type='number' name='listPrice.amount' id='price' value={listPrice.amount} />
 
           <label htmlFor='authors'>authors: </label>
           <input onChange={handleChange} type='text' name='authors' id='authors' value={authors} />
 
           <label htmlFor='publishedDate'>published at: </label>
-          <input type='number' onChange={handleChange} value={publishedDate} />
+          <input type='number' id='publishedDate' onChange={handleChange} value={publishedDate} />
 
           <label htmlFor='description'>description: </label>
           <textarea onChange={handleChange} type='text' name='description' id='description' value={description} />
